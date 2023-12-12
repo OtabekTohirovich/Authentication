@@ -1,12 +1,15 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 const SecurityPage: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
-  if (!localStorage.getItem("siymoToken")) return children;
+  const location = useLocation()
+  console.log(location.pathname);
+  
+  //  return <Navigate to={"login"? "sign-up": "login"} />;
 
-  return <Navigate to={"login"} />
+  return children;
 };
 
 export default SecurityPage;

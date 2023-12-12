@@ -2,14 +2,14 @@ import React from "react"
 import { Buttonstyle } from "./style"
 
 interface CustumButtonProps {
-  submitHandler?: any
+  handleSubmit?: any
   name: string
 }
 
-const CustumButton:React.FC<CustumButtonProps> = ({name, submitHandler}) => {
+const CustumButton:React.FC<CustumButtonProps> = ({name, handleSubmit}) => {
   return (
     <Buttonstyle onClick={()=> {
-      submitHandler()
+      handleSubmit()
     }}>
         {name}
     </Buttonstyle>

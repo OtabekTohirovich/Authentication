@@ -4,11 +4,14 @@ import { Inputstyle } from "./style";
 interface CustumInputProps {
   name: string;
   placeholder: string;
+  handleSubmit: any
 }
 
-const CustumInput: React.FC<CustumInputProps> = ({ placeholder, name }) => {
+const CustumInput: React.FC<CustumInputProps> = ({ placeholder, name, handleSubmit }) => {
   return (
-      <Inputstyle placeholder={placeholder} type={name} required />
+      <Inputstyle onChange={(text)=> {
+        handleSubmit(text.target.value)
+      }} placeholder={placeholder} type={name} required />
   );
 };
 

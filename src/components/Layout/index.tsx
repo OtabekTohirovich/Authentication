@@ -13,7 +13,12 @@ const Layout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (pathname === "/") navigate("/home");
+    if (localStorage.getItem("token")) {
+      if (pathname === "/") navigate("/home");
+    }
+    else {
+      if (pathname === "/") navigate("/login");
+    }
   }, [pathname]);
   return (
     <div style={{width: '100%',height: '100vh'}}>

@@ -1,12 +1,44 @@
 import { CardMedia, Stack, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustumInput from "../CustumInput";
 import CoustumPassword from "../CoustumPassword";
 import CustumButton from "../CustumButton";
 import extra from "../../assets/Group 13.png";
 import girl from "../../assets/Saly-14.png";
+import { useState } from "react";
+import { useSignupUserMutation } from "../../store/action/AuthAction";
 
 const SignUp = () => {
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [number, setNumber] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [date_of_birth, setdate_of_birth] = useState();
+  const navigate = useNavigate();
+
+  const [signupUser, { data, isLoading }] = useSignupUserMutation();
+  const handleSubmit = () => {
+    signupUser({
+      firstName: `${firstName}`,
+      lastName: `${lastName}`,
+      date_of_birth: `${date_of_birth}`,
+      phone: `${number}`,
+      email: `${email}`,
+      password: `${password}`,
+      role: "reader",
+    })
+      .unwrap()
+      .then((data) => {
+        if (data.success == true) {
+          navigate("/");
+          localStorage.setItem("token", data.token);
+          console.log(data);
+        }
+      });
+      console.log(data);
+
+  };
   return (
     <Stack
       sx={{
@@ -84,7 +116,7 @@ const SignUp = () => {
               fontWeight: "500",
               paddingLeft: "10px",
             }}
-            to={"/home"}
+            to={"/login"}
           >
             Login here !
           </Link>
@@ -110,14 +142,42 @@ const SignUp = () => {
         >
           Sign Up
         </Typography>
-        <CustumInput name="text" placeholder="Create First name" />
-        <CustumInput name="text" placeholder="Create Last name" />
-        <CustumInput name="number" placeholder="Contact number" />
-        <CustumInput name="email" placeholder="Enter Your Email " />
-        <CoustumPassword name="password" placeholder="Password" />
+        <CustumInput
+          handleSubmit={setFirstName}
+          name="text"
+          placeholder="Create First name"
+        />
+        <CustumInput
+          handleSubmit={setLastName}
+          name="text"
+          placeholder="Create Last name"
+        />
+        <CustumInput
+          handleSubmit={setNumber}
+          name="phone"
+          placeholder="Contact number"
+        />
+        <CustumInput
+          handleSubmit={setEmail}
+          name="email"
+          placeholder="Enter Your Email "
+        />
+        <CustumInput
+          handleSubmit={setdate_of_birth}
+          name="text"
+          placeholder="Enter Your Birthday 2003-08-20"
+        />
+        <CoustumPassword
+          setPassword={setPassword}
+          name="password"
+          placeholder="Password"
+        />
 
-        <div style={{ maxWidth: "369px", width: "100%", marginTop: "35px" }}>
-          <CustumButton name={"Register"} />
+        <div
+          className="btnSubmit"
+          style={{ maxWidth: "369px", width: "100%", marginTop: "35px" }}
+        >
+          <CustumButton handleSubmit={handleSubmit} name={"Register"} />
         </div>
         <div
           style={{
