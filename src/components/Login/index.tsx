@@ -17,7 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState();
   // const toast = useToast();
   const navigate = useNavigate();
-  const [signinUser, { data, isLoading, error, isError, isSuccess }] =
+  const [signinUser, { data, isSuccess }] =
     useSigninUserMutation();
   console.log(data);
 

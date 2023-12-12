@@ -3,7 +3,6 @@ import Login from "./components/Login";
 import Layout from "./components/Layout";
 import { routes, routesNoToken } from "./routes/routes";
 import NotFound from "./pages/NotFound";
-import SecurityPage from "./pages/SecurityPage";
 
 const App = () => {
   return (

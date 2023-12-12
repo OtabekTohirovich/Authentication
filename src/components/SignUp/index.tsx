@@ -17,7 +17,7 @@ const SignUp = () => {
   const [date_of_birth, setdate_of_birth] = useState();
   const navigate = useNavigate();
 
-  const [signupUser, { data, isLoading }] = useSignupUserMutation();
+  const [signupUser, { data }] = useSignupUserMutation();
   const handleSubmit = () => {
     signupUser({
       firstName: `${firstName}`,
